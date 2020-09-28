@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import QuestionCard from './components/QuestionCard';
 import { fetchQuizQuestions, Difficulty, QuestionState} from './API'
 import ShowResult from './components/ShowResult';
+import { GlobalStyle } from './styles/GlobalStyle'
+import { MainButton } from './styles/Button'
+import { QuestionWrapper, ResultWrapper, Wrapper } from './styles/Wrapper'
 
-const TOTAL_QUESTION = 2;
+const TOTAL_QUESTION = 10;
 
 export type AnswerObject = {
   questionNumber: number;
@@ -83,34 +86,39 @@ const App = () => {
   console.log(userAnswers, 'user answers');
   
   return (
-    <div className="App">
-      <h1>QUIZZZ</h1>
-      {gameOver || userAnswers.length === TOTAL_QUESTION ? (
-        <button className='start' onClick={handleStart}>Start</button>
-      ) : null}
+    <>
+      <GlobalStyle/>
+      <Wrapper>
+        <h1>QUIZ GAME FOR JESS</h1>
+        {gameOver || userAnswers.length === TOTAL_QUESTION ? (
+          <MainButton onClick={handleStart}>{userAnswers.length === TOTAL_QUESTION ? 'Restart' : 'Start'}</MainButton>
+        ) : null}
 
-      {!gameOver ? <p className='score'>Score: {score}/{TOTAL_QUESTION}</p> : null}
-      {loading ? <p className='loading'>Loading questions</p> : null}
-      
-      { !loading && !gameOver && (
-        <QuestionCard
-           questionNumber = { number + 1 }
-           totalQuestion = {TOTAL_QUESTION}
-           question = { questions[number].question }
-           answers = { questions[number].answers } 
-           userAnswer = { userAnswers ? userAnswers[number] : undefined }
-           callback = { checkAnswer }
-        />
-      )}
-      { !gameOver && !loading && userAnswers.length === number + 1 && number < TOTAL_QUESTION-1 ? <button className='next' onClick={handleNextQuestion}>Next Question</button> : null}
-      {userAnswers.length === TOTAL_QUESTION ? <button onClick={handleShowResult}>show result</button> : null}
-      {showResult ? userAnswers.map((userAnswer) => (
-        <ShowResult question={userAnswer.question} userAnswer={userAnswer.userAnswer} correctAnswer={userAnswer.correctAnswer} result={userAnswer.correct} number={userAnswer.questionNumber} key={userAnswer.questionNumber}/>
-      )
-      ) : null }
-      
+        {!gameOver ? <p className='score'>Score: {score}/{TOTAL_QUESTION}</p> : null}
+        {loading ? <p className='loading'>Loading questions</p> : null}
+        
+        { !loading && !gameOver && (
+          <QuestionCard
+            questionNumber = { number + 1 }
+            totalQuestion = {TOTAL_QUESTION}
+            question = { questions[number].question }
+            answers = { questions[number].answers } 
+            userAnswer = { userAnswers ? userAnswers[number] : undefined }
+            callback = { checkAnswer }
+          />
+        )}
+        { !gameOver && !loading && userAnswers.length === number + 1 && number < TOTAL_QUESTION-1 ? <MainButton className='next' onClick={handleNextQuestion}>Next Question</MainButton> : null}
+        {userAnswers.length === TOTAL_QUESTION ? <MainButton onClick={handleShowResult}>show result</MainButton> : null}
+        {showResult ? <ResultWrapper>
+        {showResult ? userAnswers.map((userAnswer) => (
+          <ShowResult question={userAnswer.question} userAnswer={userAnswer.userAnswer} correctAnswer={userAnswer.correctAnswer} result={userAnswer.correct} number={userAnswer.questionNumber} key={userAnswer.questionNumber}/>
+        )
+        ) : null }
 
-    </div>
+        </ResultWrapper>
+        : null}
+      </Wrapper>
+    </>
   );
 }
 

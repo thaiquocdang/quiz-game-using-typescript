@@ -4,9 +4,9 @@ import { fetchQuizQuestions, Difficulty, QuestionState} from './API'
 import ShowResult from './components/ShowResult';
 import { GlobalStyle } from './styles/GlobalStyle'
 import { MainButton } from './styles/Button'
-import { QuestionWrapper, ResultWrapper, Wrapper } from './styles/Wrapper'
+import { ResultWrapper, Wrapper } from './styles/Wrapper'
 
-const TOTAL_QUESTION = 10;
+const TOTAL_QUESTION = 2;
 
 export type AnswerObject = {
   questionNumber: number;

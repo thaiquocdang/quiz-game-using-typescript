@@ -24,12 +24,12 @@ export const Wrapper = styled.div`
 `
 
 export const QuestionWrapper = styled.div`
+    padding: 10px 30px;
     ${setFlex({direction: 'column', y: 'center'})};
     max-width: 1000px;
     background: ${setColor.mainWhite};
     border-radius: 10px;
     border: 4px solid ${setColor.primaryColor};
-    padding: 10px;
     /* text-align: center; */
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.3); 
 `

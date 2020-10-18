@@ -6,7 +6,7 @@ import { GlobalStyle } from './styles/GlobalStyle'
 import { MainButton } from './styles/Button'
 import { ResultWrapper, Wrapper } from './styles/Wrapper'
 
-const TOTAL_QUESTION = 2;
+const TOTAL_QUESTION = 10;
 
 export type AnswerObject = {
   questionNumber: number;
